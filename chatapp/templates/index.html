@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chat App</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Custom CSS -->
+    <link href="static/css/index.css" rel="stylesheet">
+</head>
+<body>
+    <div class="container-fluid h-100">
+        <div class="row h-100">
+            <!-- Contacts List -->
+            <div class="col-md-3 bg-light border-right">
+                <div class="p-3">
+                    <h4>Rooms</h4>
+                    <ul class="list-group list-group-flush">
+                        {% for rooms in rooms %}
+                        <li class="list-group-item">{{ rooms.name }}</li>
+                        {% endfor %}
+                        <!-- Add more contacts as needed -->
+                    </ul>
+                     <button class="btn btn-primary mt-3" onclick="openCreateRoomModal()">Create New Room</button>
+                </div>
+            </div>
+            <div id="createRoomModal" class="modal fade" tabindex="-1" role="dialog">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title">Create New Room</h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <div class="modal-body">
+                            <form method="POST" action="/create-room"> <!-- Specify your server endpoint URL here -->
+                                <div class="form-group">
+                                    <label for="roomName">Room Name</label>
+                                    <input type="text" class="form-control" id="roomName" name="roomName" placeholder="Enter room name">
+                                </div>
+                                <!-- Add more form fields as needed -->
+                                <button type="submit" class="btn btn-primary">Create</button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Chat Window -->
+            <div class="col-md-9">
+                <div class="d-flex flex-column h-100">
+                    <!-- Header -->
+                    <div class="bg-white border-bottom p-3">
+                        <h5 class="mb-0">Chat with John Doe</h5>
+                        <span class="text-muted">Online</span>
+                    </div>
+                    <!-- Chat Messages -->
+                    <div class="flex-grow-1 bg-light p-3" id="chat-window">
+                        <div class="mb-2">
+                            <strong>John Doe:</strong> Hi there!
+                        </div>
+                        <div class="mb-2">
+                            <strong>You:</strong> Hello! How are you?
+                        </div>
+                        <!-- More messages -->
+                    </div>
+                    <!-- Message Input -->
+                    <div class="bg-white border-top p-3">
+                        <form class="d-flex">
+                            <input type="text" class="form-control mr-2" placeholder="Type your message">
+                            <button type="submit" class="btn btn-primary">Send</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Bootstrap JS and dependencies -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script>
+        function openCreateRoomModal() {
+            $('#createRoomModal').modal('show'); // Show the modal
+        }
+    </script>
+</body>
+</html>

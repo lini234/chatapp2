@@ -1,0 +1,10 @@
+body {
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #f8f9fa;
+}
+#chat-window {
+    overflow-y: auto;
+}
